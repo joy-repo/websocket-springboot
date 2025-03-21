@@ -14,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChatMessage {
-    @NonNull
+
     private String content;
     @NonNull
     private String sender;

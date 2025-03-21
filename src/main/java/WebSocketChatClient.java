@@ -1,3 +1,5 @@
+import com.example.websocket.spring_websocket.dto.ChatMessage;
+import com.example.websocket.spring_websocket.dto.MessageType;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.simp.stomp.*;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
@@ -58,9 +60,21 @@ class CustomStompSessionHandler extends StompSessionHandlerAdapter {
                 System.out.println("Received message: " + message.getSender() + " -> " + message.getContent());
             }
         });
+        //Add user
+        ChatMessage chatMessage = ChatMessage.builder()
+                .messageType(MessageType.JOIN)
+                .sender("User1")
+                .build();
+
+        session.send("/app/chat.addUser", chatMessage);
 
         // Send a chat message
-        ChatMessage chatMessage = new ChatMessage("User1", "Hello, WebSocket!");
+        chatMessage = ChatMessage.builder()
+                .messageType(MessageType.CHAT)
+                .sender("User1")
+                .content("Hello, WebSocket!")
+                .build();
+
         session.send("/app/chat.sendMessage", chatMessage);
     }
 
@@ -70,31 +84,3 @@ class CustomStompSessionHandler extends StompSessionHandlerAdapter {
     }
 }
 
-// ChatMessage Model
-class ChatMessage {
-    private String sender;
-    private String content;
-
-    public ChatMessage() {}
-
-    public ChatMessage(String sender, String content) {
-        this.sender = sender;
-        this.content = content;
-    }
-
-    public String getSender() {
-        return sender;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-}
