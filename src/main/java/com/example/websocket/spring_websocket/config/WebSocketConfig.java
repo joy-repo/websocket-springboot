@@ -29,6 +29,13 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 .setClientLogin("guest")    // RabbitMQ username
                 .setClientPasscode("guest"); // RabbitMQ password
 
+
+                /////////////////////////////////////////////////////////////////
+
+                Enable RabbitMQ STOMP Plugin : rabbitmq-plugins enable rabbitmq_stomp
+                Check if RabbitMQ STOMP is Running :  rabbitmqctl status
+                ---- [{rabbitmq_stomp,"RabbitMQ STOMP adapter","3.x.x"}, ...]---
+
  */
     }
 
