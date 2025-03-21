@@ -20,7 +20,7 @@ public class ChatController {
     public ChatMessage addUser(@Payload ChatMessage chatMessage,
                                SimpMessageHeaderAccessor headerAccessor){
 
-        headerAccessor.getSessionAttributes().put("usernamd" ,chatMessage.getSender());
+        headerAccessor.getSessionAttributes().put("username" ,chatMessage.getSender());
         return chatMessage;
     }
 }
