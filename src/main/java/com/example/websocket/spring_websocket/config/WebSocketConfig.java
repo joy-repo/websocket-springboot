@@ -21,6 +21,20 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         registry.setApplicationDestinationPrefixes("/app");
         registry.enableSimpleBroker("/app");
+        registry.setUserDestinationPrefix("/user");
+
+
+        /*
+        Configuration
+What It Does
+setApplicationDestinationPrefixes("/app") ::
+Ensures that only messages starting with /app are handled by controllers (@MessageMapping).
+setUserDestinationPrefix("/user") ::
+Enables private messaging by routing messages to /user/{username}/queue/messages.
+
+         */
+
+
 /*
         // Use RabbitMQ as the message broker
         registry.enableStompBrokerRelay("/queue", "/topic")
